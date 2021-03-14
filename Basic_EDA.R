@@ -21,11 +21,11 @@ rose <- all.movements[which(all.movements$lastname == "Rose" & all.movements$eve
 gasol <- all.movements[which(all.movements$lastname == "Gasol" & all.movements$event.id == 6),]
 
 
-plot_ly(data = rose, x = x_loc, y = y_loc, mode = "markers", color=cut(rose$game_clock, breaks=3)) %>% 
+plot_ly(data = rose, x = rose$x_loc, y = rose$y_loc, mode = "markers", color=cut(rose$game_clock, breaks=3)) %>% 
     layout(xaxis = list(range = c(0, 100)), 
            yaxis = list(range = c(0, 50))) 
 
-plot_ly(data = gasol, x = x_loc, y = y_loc, mode = "markers") %>% 
+plot_ly(data = gasol, x = gasol$x_loc, y = gasol$y_loc, mode = "markers") %>% 
   layout(xaxis = list(range = c(0, 100)), 
          yaxis = list(range = c(0, 50))) 
 
@@ -67,7 +67,7 @@ testball <- rose %>% filter (lastname=="ball") %>% select (x_loc,y_loc)
 testrosel <- 1:nrow(testrose)
 distsdf <- unlist(lapply(testrosel,function(x) {dist(rbind(testrose[x,], testball[x,]))}))
 ball_distance <- rose %>% filter (lastname=="ball") %>% select (game_clock) %>% mutate(distance=distsdf)
-plot_ly(data = ball_distance, x=game.clock, y=distsdf,mode = "markers")
+plot_ly(data = ball_distance, x=ball_distance$game.clock, y=ball_distance$distance,mode = "markers")
 
 ########Distance Matrix w/ function for one player with the ball for one event
 
@@ -81,7 +81,7 @@ player_dist <- function(lastnameA,lastnameB, eventID) {
 }
 
 temp <- player_dist("Rose","ball",6)
-plot_ly(data = ball_distance, x=game_clock, y=temp,mode = "markers")
+plot_ly(data = ball_distance, x=ball_distance$game_clock, y=temp,mode = "markers")
 
 ########Distance Matrix for one player with all other players for one event
 pickplayer <- "ball"
@@ -99,7 +99,7 @@ head(bigdistancedf)
 ##Plot with plotly - not elegant but works
 for(i in 1:(ncol(bigdistancedf)-1)){
 if(i==1){
-  pString<-"p <- plot_ly(data = bigdistancedf, x = game_clock, y = bigdistancedf[,1], name = colnames(bigdistancedf[1]),mode = 'markers')"
+  pString<-"p <- plot_ly(data = bigdistancedf, x = bigdistancedf$game_clock, y = bigdistancedf[,1], name = colnames(bigdistancedf[1]),mode = 'markers')"
 } else {
   pString<-paste(pString, " %>% add_trace(y =",  eval(paste("bigdistancedf[,",i,"]",sep="")),", name=", eval(paste("colnames(bigdistancedf[", i,"])",sep="")), ")", sep="")
 }
