@@ -9,8 +9,8 @@ library(plotly)
 ## The munge for this file takes 7 minutes on my computer and results in a dataframe 3258100 obs. of 13 variables
 # See NBA stats for this game at http://stats.nba.com/game/#!/0021500391/playbyplay/
 
-all.movements <- sportvu_convert_json("data/0021500391.json")
-write.csv(all.movements,"all.movements_0021500391.csv", row.names = FALSE)
+all.movements <- sportvu_convert_json("../animate_tracking/0021500431.json")
+write.csv(all.movements,"data/all.movements_0021500431.csv", row.names = FALSE)
 
 ########Extract Movement for One Player
 ## Code from http://tcbanalytics.com/blog/nba-movement-data-R.html#.VnX8d4RiOCQ
