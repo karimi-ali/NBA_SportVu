@@ -1,3 +1,4 @@
+*DS_Store
 
 *.dcf
 
@@ -14,4 +15,5 @@ data/all2/Readme.md
 data/all2/svn-cigg54
 
 all.movements_0021500391.csv
-data/0021500391.json
+data/*.json
+data/*.csv
